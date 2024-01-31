@@ -8,7 +8,7 @@ const userController = {
       res.json(dbUserData);
     } catch (err) {
       console.error(err);
-      res.status(500).json(err);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 
@@ -27,7 +27,7 @@ const userController = {
       res.json(dbUserData);
     } catch (err) {
       console.error(err);
-      res.status(500).json(err);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 
@@ -38,7 +38,14 @@ const userController = {
       res.json(dbUserData);
     } catch (err) {
       console.error(err);
-      res.status(500).json(err);
+
+      // Check if it's a validation error
+      if (err.name === 'ValidationError') {
+        const errors = Object.values(err.errors).map(error => error.message);
+        return res.status(400).json({ error: 'Validation Error', messages: errors });
+      }
+
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 
@@ -58,7 +65,7 @@ const userController = {
       res.json(dbUserData);
     } catch (err) {
       console.error(err);
-      res.status(500).json(err);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 
@@ -75,7 +82,7 @@ const userController = {
       res.json({ message: 'User and associated thoughts deleted!' });
     } catch (err) {
       console.error(err);
-      res.status(500).json(err);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 
@@ -95,7 +102,7 @@ const userController = {
       res.json(dbUserData);
     } catch (err) {
       console.error(err);
-      res.status(500).json(err);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 
@@ -115,7 +122,7 @@ const userController = {
       res.json(dbUserData);
     } catch (err) {
       console.error(err);
-      res.status(500).json(err);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 };
