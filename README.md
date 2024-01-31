@@ -13,3 +13,5 @@ To set up the application, follow these steps:
 2. **Clone the Repository:**
 
 3. **Install Dependencies**
+
+4. **Npm start**
